@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Benjamin's Place · Rooms & Bedspaces in Ilagan City</title>
+  <meta name="description" content="Safe, clean, and affordable rooms and bedspaces in Ilagan City along Maharlika Highway. Wi-Fi, utilities, kitchen, parking and CCTV included.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #F9F8F6;
+      --brown-dark: #3A2518;
+      --text: #2B2118;
+      --btn: #A67C52;
+      --btn-hover: #8C6540;
+      --green: #5C7A4A;
+      --card: #FFFFFF;
+      --line: #E7E1D8;
+      --muted: #6F6356;
+      --tint: #F3EFE8;
+      --radius: 14px;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; scroll-padding-top: 84px; }
+    body {
+      font-family: 'Manrope', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+      background: var(--bg); color: var(--text);
+      line-height: 1.65; font-size: 16px;
+    }
+    img { max-width: 100%; display: block; }
+    a { color: inherit; }
+    h1, h2, h3 { font-family: 'Cormorant Garamond', Georgia, serif; line-height: 1.15; color: var(--brown-dark); font-weight: 600; }
+    section { padding: 80px 20px; }
+    .wrap { max-width: 1120px; margin: 0 auto; }
+    .section-title { font-size: clamp(2.1rem, 4.5vw, 2.9rem); text-align: center; margin-bottom: 12px; }
+    .section-intro { text-align: center; color: var(--muted); max-width: 620px; margin: 0 auto 44px; }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      padding: 13px 26px; border-radius: 999px; border: 1.5px solid transparent;
+      font-family: inherit; font-weight: 600; font-size: .96rem; text-decoration: none; cursor: pointer;
+      transition: background .2s, color .2s, border-color .2s;
+    }
+    .btn-primary { background: var(--btn); color: #fff; }
+    .btn-primary:hover { background: var(--btn-hover); }
+    .btn-outline { background: transparent; color: var(--brown-dark); border-color: var(--brown-dark); }
+    .btn-outline:hover { background: var(--brown-dark); color: #fff; }
+    .btn-light { background: transparent; color: #fff; border-color: rgba(255,255,255,.85); }
+    .btn-light:hover { background: #fff; color: var(--brown-dark); }
+
+    /* Header */
+    header.site-header { position: sticky; top: 0; z-index: 50; background: var(--brown-dark); color: #fff; }
+    .nav {
+      max-width: 1120px; margin: 0 auto; padding: 14px 20px;
+      display: flex; align-items: center; justify-content: space-between; gap: 16px;
+    }
+    .logo { font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 700; font-size: 1.5rem; text-decoration: none; color: #fff; }
+    .nav-links { display: flex; gap: 24px; list-style: none; }
+    .nav-links a { text-decoration: none; font-size: .9rem; opacity: .88; }
+    .nav-links a:hover { opacity: 1; text-decoration: underline; text-underline-offset: 4px; }
+    .header-btn { padding: 9px 18px; font-size: .88rem; }
+
+    /* Jump strip */
+    .jump-strip { background: #fff; border-bottom: 1px solid var(--line); }
+    .jump-inner { max-width: 1120px; margin: 0 auto; padding: 14px 20px; display: flex; justify-content: center; flex-wrap: wrap; gap: 10px; }
+    .jump-chip {
+      text-decoration: none; font-size: .9rem; font-weight: 600; color: var(--brown-dark);
+      border: 1.5px solid var(--line); background: var(--bg); padding: 8px 18px; border-radius: 999px;
+      transition: border-color .2s, background .2s;
+    }
+    .jump-chip:hover { border-color: var(--btn); background: #fff; }
+
+    /* Hero */
+    .hero {
+      color: #fff; text-align: center; padding: 120px 20px 128px;
+      background:
+        linear-gradient(rgba(30,18,10,.6), rgba(30,18,10,.74)),
+        url('images/main-exterior.png') center/cover no-repeat;
+    }
+    .hero h1 { color: #fff; font-size: clamp(3rem, 8vw, 4.8rem); margin-bottom: 14px; font-weight: 700; }
+    .hero .tagline { font-size: clamp(1.1rem, 2.5vw, 1.3rem); font-weight: 500; margin-bottom: 14px; }
+    .hero .support { max-width: 640px; margin: 0 auto 28px; opacity: .92; }
+    .badges { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-bottom: 36px; }
+    .badge {
+      background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.3);
+      padding: 7px 15px; border-radius: 999px; font-size: .86rem; font-weight: 500;
+      display: inline-flex; align-items: center; gap: 7px;
+    }
+    .badge svg { width: 14px; height: 14px; stroke: #C9E0BA; }
+    .hero-ctas { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; }
+
+    /* Rooms */
+    .rooms-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 20px; }
+    .room-card { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 30px 24px; text-align: center; }
+    .room-card h3 { font-size: 1.45rem; margin-bottom: 8px; }
+    .price { font-family: 'Cormorant Garamond', Georgia, serif; font-size: 2.2rem; color: var(--btn); font-weight: 700; line-height: 1.1; }
+    .price small { font-size: .9rem; color: var(--muted); font-family: 'Manrope', sans-serif; font-weight: 500; }
+    .room-card .desc { color: var(--muted); font-size: .93rem; margin-top: 12px; }
+    .room-card .capacity {
+      display: inline-block; margin-top: 14px; font-size: .82rem; font-weight: 600;
+      color: var(--brown-dark); background: var(--tint); padding: 5px 13px; border-radius: 999px;
+    }
+    .rooms-note { text-align: center; color: var(--muted); font-size: .92rem; margin-top: 30px; }
+
+    /* Included / bring */
+    .split { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+    .panel { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 34px; }
+    .panel h3 { font-size: 1.6rem; margin-bottom: 18px; }
+    .panel ul { list-style: none; }
+    .panel li { padding: 9px 0 9px 30px; position: relative; border-bottom: 1px solid var(--line); }
+    .panel li:last-child { border-bottom: none; }
+    .panel li svg { position: absolute; left: 0; top: 13px; width: 18px; height: 18px; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .panel.included li svg { stroke: var(--green); }
+    .panel.bring li svg { stroke: var(--btn); }
+
+    /* Amenities */
+    .amenities { background: var(--tint); }
+    .amenity-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 16px; }
+    .amenity {
+      background: var(--card); border-radius: var(--radius); padding: 26px 14px; text-align: center;
+      border: 1px solid var(--line); font-weight: 600; font-size: .95rem; color: var(--brown-dark);
+    }
+    .amenity svg { width: 30px; height: 30px; stroke: var(--btn); fill: none; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; display: block; margin: 0 auto 12px; }
+    .amenity-note { text-align: center; margin-top: 30px; color: var(--muted); font-size: .95rem; }
+
+    /* House rules */
+    .rules-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 18px; }
+    .rule { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 24px; }
+    .rule h3 { font-size: 1.3rem; margin-bottom: 8px; }
+    .rule p { color: var(--muted); font-size: .95rem; }
+    .rule.callout { background: var(--tint); border-color: var(--tint); grid-column: 1 / -1; }
+    .rule.callout h3 { color: var(--green); }
+
+    /* Move in */
+    .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 18px; counter-reset: step; }
+    .step { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 28px 24px; }
+    .step::before {
+      counter-increment: step; content: counter(step);
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 38px; height: 38px; border-radius: 50%; background: var(--btn); color: #fff;
+      font-weight: 700; margin-bottom: 14px; font-family: 'Manrope', sans-serif;
+    }
+    .move-out { margin-top: 28px; background: var(--tint); border-radius: var(--radius); padding: 26px 30px; }
+    .move-out h3 { margin-bottom: 10px; font-size: 1.4rem; }
+    .move-out ul { list-style: none; }
+    .move-out li { padding: 5px 0 5px 22px; position: relative; }
+    .move-out li::before { content: '→'; position: absolute; left: 0; color: var(--btn); }
+
+    /* Gallery */
+    .gallery { background: var(--tint); }
+    .gallery-group { margin-bottom: 48px; }
+    .gallery-group h3 { font-size: 1.5rem; margin-bottom: 16px; }
+    .gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 12px; }
+    .gallery-grid button {
+      border: 0; padding: 0; background: none; cursor: zoom-in; border-radius: 12px; overflow: hidden; aspect-ratio: 4 / 3;
+    }
+    .gallery-grid img { width: 100%; height: 100%; object-fit: cover; transition: transform .35s; }
+    .gallery-grid button:hover img { transform: scale(1.05); }
+    .gallery-grid button:focus-visible { outline: 3px solid var(--btn); outline-offset: 2px; }
+
+    /* Lightbox: fills the screen and centres the photo both ways */
+    .lightbox {
+      position: fixed; inset: 0; margin: 0; width: 100vw; height: 100vh; max-width: none; max-height: none;
+      border: 0; padding: 0; background: transparent;
+    }
+    .lightbox[open] { display: flex; flex-direction: column; align-items: center; justify-content: center; }
+    .lightbox::backdrop { background: rgba(20,12,6,.92); }
+    .lightbox .lb-frame { display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%; height: 100%; padding: 56px 16px 24px; }
+    .lightbox img { max-width: 92vw; max-height: 82vh; width: auto; height: auto; object-fit: contain; border-radius: 10px; margin: 0 auto; }
+    .lightbox .lb-caption { color: #fff; text-align: center; margin-top: 14px; font-size: .95rem; }
+    .lightbox .lb-close {
+      position: fixed; top: 14px; right: 18px; background: #fff; color: var(--brown-dark);
+      border: 0; border-radius: 999px; width: 42px; height: 42px; font-size: 1.5rem; cursor: pointer; line-height: 1;
+    }
+
+    /* Location */
+    .location-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; align-items: start; }
+    .map-frame { width: 100%; height: 400px; border: 0; border-radius: var(--radius); }
+    .address { font-size: 1.05rem; margin-bottom: 22px; }
+    .landmarks-title { font-family: 'Cormorant Garamond', Georgia, serif; font-size: 1.4rem; margin-bottom: 8px; }
+    .landmarks { list-style: none; margin-bottom: 22px; }
+    .landmarks li { padding: 7px 0 7px 22px; position: relative; border-bottom: 1px solid var(--line); }
+    .landmarks li::before { content: ''; position: absolute; left: 2px; top: 16px; width: 7px; height: 7px; border-radius: 50%; background: var(--btn); }
+    .transport { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 16px 20px; font-size: .95rem; margin-bottom: 24px; }
+    .button-row { display: flex; flex-wrap: wrap; gap: 12px; }
+
+    /* Contact */
+    .contact { background: var(--brown-dark); color: #fff; }
+    .contact h2 { color: #fff; }
+    .contact .section-intro { color: #E7DED2; }
+    .contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 20px; }
+    .contact-card { background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.16); border-radius: var(--radius); padding: 30px; }
+    .contact-card h3 { color: #fff; font-size: 1.55rem; margin-bottom: 14px; }
+    .contact-card p, .contact-card a { color: #F3ECE2; }
+    .contact-line { display: block; margin-bottom: 10px; text-decoration: none; }
+    .contact-card a.contact-line:hover { text-decoration: underline; text-underline-offset: 3px; }
+    .contact-card .btn { margin-top: 16px; }
+    .gcash-box { background: rgba(255,255,255,.08); border-radius: 10px; padding: 18px; margin-top: 12px; }
+    .gcash-box .label { font-size: .85rem; letter-spacing: .08em; text-transform: uppercase; color: #E7DED2; }
+    .gcash-box .num { font-family: 'Cormorant Garamond', Georgia, serif; font-size: 1.9rem; letter-spacing: 1px; color: #fff; font-weight: 700; margin: 4px 0 10px; }
+    .copy-btn.copied { background: var(--green); }
+    .copy-msg { font-size: .85rem; color: #D8E8CD; margin-top: 10px; min-height: 1.2em; }
+
+    footer { background: #2C1B10; color: #CDBFAE; text-align: center; padding: 28px 20px; font-size: .88rem; }
+
+    /* Responsive */
+    @media (max-width: 860px) {
+      .split, .location-grid { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+    }
+    @media (max-width: 520px) {
+      section { padding: 60px 16px; }
+      .hero { padding: 90px 16px 96px; }
+      .header-btn { padding: 8px 14px; font-size: .82rem; }
+      .panel { padding: 26px; }
+      .map-frame { height: 300px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      * { transition: none !important; }
+    }
+  
+    /* ===== Mobile refinements (overrides earlier breakpoints) ===== */
+    @media (max-width: 860px) {
+      .nav { flex-wrap: wrap; padding: 12px 16px 0; row-gap: 0; }
+      .nav-links {
+        display: flex; order: 3; width: 100%; gap: 6px; flex-wrap: nowrap;
+        overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none;
+        padding: 10px 0 12px; margin-top: 4px; border-top: 1px solid rgba(255,255,255,.12);
+      }
+      .nav-links::-webkit-scrollbar { display: none; }
+      .nav-links li { flex: 0 0 auto; }
+      .nav-links a {
+        display: inline-block; padding: 8px 14px; border-radius: 999px;
+        background: rgba(255,255,255,.1); opacity: 1; font-size: .88rem; white-space: nowrap;
+      }
+      .nav-links a:hover { text-decoration: none; background: rgba(255,255,255,.2); }
+      .nav-links a:active { background: var(--btn); }
+    }
+    @media (max-width: 520px) {
+      html { scroll-padding-top: 130px; }
+      .logo { font-size: 1.3rem; }
+      .header-btn { padding: 8px 14px; }
+      .hero { padding: 72px 18px 80px; }
+      .hero h1 { font-size: 2.9rem; }
+      .hero .support { font-size: .95rem; margin-bottom: 24px; }
+      .badges { gap: 8px; margin-bottom: 28px; }
+      .badge { font-size: .8rem; padding: 6px 12px; }
+      .hero-ctas { flex-direction: column; width: 100%; max-width: 320px; margin: 0 auto; }
+      .hero-ctas .btn { width: 100%; }
+      .section-title { font-size: 2.1rem; }
+      .section-intro { font-size: .95rem; margin-bottom: 30px; }
+      section { padding: 56px 16px; }
+      .room-card { padding: 24px 20px; }
+      .price { font-size: 2rem; }
+      .panel { padding: 22px; }
+      .panel h3 { font-size: 1.4rem; }
+      .amenity-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
+      .amenity { padding: 20px 10px; font-size: .9rem; }
+      .rules-grid { grid-template-columns: 1fr; }
+      .move-out { padding: 22px; }
+      .gallery-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+      .gallery-grid button { border-radius: 10px; }
+      .gallery-group { margin-bottom: 36px; }
+      .gallery-group h3 { font-size: 1.3rem; }
+      .map-frame { height: 260px; }
+      .button-row { flex-direction: column; }
+      .button-row .btn { width: 100%; }
+      .contact-card { padding: 24px; }
+      .contact-card .btn { width: 100%; }
+      .contact-line { word-break: break-word; }
+      .gcash-box .num { font-size: 1.6rem; }
+      .gcash-box .copy-btn { width: 100%; }
+      .lightbox .lb-frame { padding: 52px 10px 20px; }
+      .lightbox img { max-width: 96vw; max-height: 80vh; }
+    }
+    @media (max-width: 360px) {
+      .amenity-grid { grid-template-columns: 1fr; }
+      .hero h1 { font-size: 2.5rem; }
+    }
+
+    .hero-jump { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-bottom: 22px; }
+    .badge-link { text-decoration: none; color: #fff; font-weight: 600; transition: background .2s, color .2s; }
+    .badge-link:hover { background: #fff; color: var(--brown-dark); }
+  </style>
+</head>
+<body>
+
+<!-- Header -->
+<header class="site-header">
+  <nav class="nav" aria-label="Main navigation">
+    <a href="#top" class="logo">Benjamin's Place</a>
+    <ul class="nav-links">
+      <li><a href="#rooms">Rooms</a></li>
+      <li><a href="#amenities">Amenities</a></li>
+      <li><a href="#gallery">Gallery</a></li>
+      <li><a href="#rules">Rules</a></li>
+      <li><a href="#location">Location</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <a href="https://m.me/leni.domingo" target="_blank" rel="noopener" class="btn btn-primary header-btn">Message us</a>
+  </nav>
+</header>
+
+<main id="top">
+
+<!-- Hero -->
+<section class="hero" aria-labelledby="hero-title">
+  <div class="wrap">
+    <h1 id="hero-title">Benjamin's Place</h1>
+    <p class="tagline">Safe, clean, and affordable living in the heart of Ilagan</p>
+    <p class="support">Comfortable rooms and bedspaces along Maharlika Highway, with Wi-Fi, kitchen, parking, and a quiet, well-managed home.</p>
+    <nav class="hero-jump" aria-label="Quick links">
+      <a class="badge badge-link" href="#rooms">Rooms &amp; Rates</a>
+      <a class="badge badge-link" href="#amenities">Amenities</a>
+      <a class="badge badge-link" href="#gallery">Gallery</a>
+    </nav>
+    <div class="badges">
+      <span class="badge"><svg viewBox="0 0 24 24" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5a10 10 0 0 1 14 0M8.5 16a5 5 0 0 1 7 0M12 19.5h.01"/></svg>Wi-Fi &amp; Utilities Included</span>
+      <span class="badge"><svg viewBox="0 0 24 24" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>CCTV Secured</span>
+      <span class="badge"><svg viewBox="0 0 24 24" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Near Schools &amp; Hospital</span>
+      <span class="badge"><svg viewBox="0 0 24 24" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Friendly House Rules</span>
+    </div>
+    <div class="hero-ctas">
+      <a href="https://m.me/leni.domingo" target="_blank" rel="noopener" class="btn btn-primary">Message us on Facebook</a>
+      <a href="#rooms" class="btn btn-light">View Rooms &amp; Rates</a>
+    </div>
+  </div>
+</section>
+
+<!-- Rooms & Rates -->
+<section id="rooms" aria-labelledby="rooms-title">
+  <div class="wrap">
+    <h2 class="section-title" id="rooms-title">Rooms &amp; Rates</h2>
+    <p class="section-intro">All rates are monthly and include water, electricity, and Wi-Fi.</p>
+    <div class="rooms-grid">
+      <div class="room-card">
+        <h3>Bedspacer</h3>
+        <div class="price">₱1,500 <small>/ bed</small></div>
+        <p class="desc">Shared room · Ideal for students and workers</p>
+      </div>
+      <div class="room-card">
+        <h3>2-Person Room</h3>
+        <div class="price">₱3,000 <small>/ room</small></div>
+        <span class="capacity">2 persons</span>
+      </div>
+      <div class="room-card">
+        <h3>4-Person Room</h3>
+        <div class="price">₱5,000 <small>/ room</small></div>
+        <span class="capacity">4 persons</span>
+      </div>
+      <div class="room-card">
+        <h3>6-Person Room</h3>
+        <div class="price">₱7,000 <small>/ room</small></div>
+        <span class="capacity">6 persons</span>
+      </div>
+    </div>
+    <p class="rooms-note">1 month advance + 2 months deposit required. Deposit may be refundable or consumable (tenant's choice).</p>
+  </div>
+</section>
+
+<!-- Included vs Bring -->
+<section aria-labelledby="included-title" style="padding-top:0">
+  <div class="wrap">
+    <h2 class="section-title" id="included-title">What's Included vs. What to Bring</h2>
+    <div class="split">
+      <div class="panel included">
+        <h3>Included</h3>
+        <ul>
+          <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Water &amp; Electricity</li>
+          <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Wi-Fi</li>
+          <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Shared kitchen &amp; cooking area</li>
+          <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Laundry area</li>
+          <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Parking</li>
+          <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Study / lounge area</li>
+          <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>CCTV security</li>
+        </ul>
+      </div>
+      <div class="panel bring">
+        <h3>What to Bring</h3>
+        <ul>
+          <li><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>Your own beddings, pillow, and blanket</li>
+          <li><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>Personal toiletries</li>
+          <li><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>Clothes hangers / small storage (bedspacers: no large wardrobes, chairs, or tables inside the bedroom)</li>
+          <li><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>Cooking utensils if you plan to cook</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Amenities -->
+<section id="amenities" class="amenities" aria-labelledby="amenities-title">
+  <div class="wrap">
+    <h2 class="section-title" id="amenities-title">Amenities &amp; Features</h2>
+    <div class="amenity-grid">
+      <div class="amenity">
+        <svg viewBox="0 0 24 24"><path d="M5 12.5a10 10 0 0 1 14 0M8.5 16a5 5 0 0 1 7 0M12 19.5h.01"/></svg>Wi-Fi</div>
+      <div class="amenity">
+        <svg viewBox="0 0 24 24"><path d="M4 12h16v2a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5v-2zM6 12V6a2 2 0 0 1 4 0M8 19l-1 2M16 19l1 2"/></svg>Shared Bathroom</div>
+      <div class="amenity">
+        <svg viewBox="0 0 24 24"><path d="M4 11h16v6a3 3 0 0 1-3 3H7a3 3 0 0 1-3-3v-6zM8 11V8M12 11V8M16 11V8"/></svg>Kitchen / Cooking Area</div>
+      <div class="amenity">
+        <svg viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="18" rx="2"/><circle cx="12" cy="13" r="4"/><path d="M8 6.5h.01M11 6.5h.01"/></svg>Laundry Area</div>
+      <div class="amenity">
+        <svg viewBox="0 0 24 24"><path d="M5 16v-4l2-5h10l2 5v4H5zM3 16h18M7 16v2M17 16v2"/></svg>Parking</div>
+      <div class="amenity">
+        <svg viewBox="0 0 24 24"><path d="M3 8h11v8H3zM14 11l7-3v8l-7-3"/></svg>CCTV / Security</div>
+      <div class="amenity">
+        <svg viewBox="0 0 24 24"><path d="M4 5a2 2 0 0 1 2-2h12v16H6a2 2 0 0 0-2 2zM4 19V5M8 7h6"/></svg>Study Area / Lounge</div>
+    </div>
+    <p class="amenity-note">Pets are not allowed. Visitors are welcome in the waiting/living area only until 9 PM.</p>
+  </div>
+</section>
+
+<!-- House Rules -->
+<section id="rules" aria-labelledby="rules-title">
+  <div class="wrap">
+    <h2 class="section-title" id="rules-title">House Rules</h2>
+    <div class="rules-grid">
+      <div class="rule">
+        <h3>Quiet Hours</h3>
+        <p>After 9:00 PM. Please keep noise down so everyone can rest.</p>
+      </div>
+      <div class="rule">
+        <h3>Curfew</h3>
+        <p>9:00 PM for everyone (tenants and visitors).</p>
+      </div>
+      <div class="rule">
+        <h3>Gate</h3>
+        <p>Opens around 5–6 AM. The gate does not lock at night. The 9 PM curfew is a house rule.</p>
+      </div>
+      <div class="rule">
+        <h3>Smoking</h3>
+        <p>Allowed only in the garage and waiting area. Prohibited everywhere else.</p>
+      </div>
+      <div class="rule callout">
+        <h3>Furniture Rule (important)</h3>
+        <p>Bedspacers may not bring wardrobes, chairs, or tables into the bedroom. Rooms already have dining tables and chairs. Living and waiting areas are fully furnished.</p>
+      </div>
+      <div class="rule">
+        <h3>Cleaning</h3>
+        <p>Mandatory group cleaning rotation for common areas, bedrooms, bathrooms, garage, and garbage.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Move in / out -->
+<section aria-labelledby="movein-title" style="padding-top:0">
+  <div class="wrap">
+    <h2 class="section-title" id="movein-title">Moving In &amp; Moving Out</h2>
+    <p class="section-intro">Move in in three simple steps.</p>
+    <div class="steps">
+      <div class="step"><p>Message us to check availability</p></div>
+      <div class="step"><p>Visit, choose your room or bed, and sign the contract</p></div>
+      <div class="step"><p>Pay 1 month advance + 2 months deposit and move in</p></div>
+    </div>
+    <div class="move-out">
+      <h3>Move-out Policy</h3>
+      <ul>
+        <li>30 days advance notice required</li>
+        <li>The 2-month deposit is either refundable or consumable as rent. Your choice.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- Gallery -->
+<section id="gallery" class="gallery" aria-labelledby="gallery-title">
+  <div class="wrap">
+    <h2 class="section-title" id="gallery-title">Take a Look Around</h2>
+    <p class="section-intro">Tap any photo to view it larger.</p>
+
+    <div class="gallery-group">
+      <h3>Exterior &amp; Gate</h3>
+      <div class="gallery-grid">
+        <button data-full="images/house-exterior-1.jpeg" data-caption="Exterior"><img src="images/house-exterior-1.jpeg" alt="Benjamin's Place exterior" loading="lazy"></button>
+        <button data-full="images/house-exterior-2.jpeg" data-caption="Exterior"><img src="images/house-exterior-2.jpeg" alt="Benjamin's Place exterior, another angle" loading="lazy"></button>
+        <button data-full="images/gate.jpeg" data-caption="Gate"><img src="images/gate.jpeg" alt="Entrance gate" loading="lazy"></button>
+      </div>
+    </div>
+
+    <div class="gallery-group">
+      <h3>Rooms &amp; Beds</h3>
+      <div class="gallery-grid">
+        <button data-full="images/room-4-1.jpeg" data-caption="4-person room"><img src="images/room-4-1.jpeg" alt="4-person room" loading="lazy"></button>
+        <button data-full="images/room-4-2.jpeg" data-caption="4-person room"><img src="images/room-4-2.jpeg" alt="4-person room, another view" loading="lazy"></button>
+        <button data-full="images/bedspace.jpeg" data-caption="Bed setup"><img src="images/bedspace.jpeg" alt="Typical bed frame setup" loading="lazy"></button>
+      </div>
+    </div>
+
+    <div class="gallery-group">
+      <h3>Common Areas (Living, Dining, Kitchen)</h3>
+      <div class="gallery-grid">
+        <button data-full="images/living-room.jpeg" data-caption="Living room"><img src="images/living-room.jpeg" alt="Living room" loading="lazy"></button>
+        <button data-full="images/living-room-people.jpeg" data-caption="Living room"><img src="images/living-room-people.jpeg" alt="Living room in use" loading="lazy"></button>
+        <button data-full="images/dining-area.jpeg" data-caption="Dining area"><img src="images/dining-area.jpeg" alt="Shared dining area" loading="lazy"></button>
+        <button data-full="images/dining-tables.jpeg" data-caption="Dining tables"><img src="images/dining-tables.jpeg" alt="Common area tables" loading="lazy"></button>
+        <button data-full="images/kitchen.jpeg" data-caption="Shared kitchen"><img src="images/kitchen.jpeg" alt="Shared kitchen" loading="lazy"></button>
+        <button data-full="images/outdoor-kitchen.jpeg" data-caption="Outdoor kitchen"><img src="images/outdoor-kitchen.jpeg" alt="Outdoor kitchen area" loading="lazy"></button>
+      </div>
+    </div>
+
+    <div class="gallery-group">
+      <h3>Bathroom &amp; Amenities</h3>
+      <div class="gallery-grid">
+        <button data-full="images/bathroom-sink-toilet.jpeg" data-caption="Shared bathroom"><img src="images/bathroom-sink-toilet.jpeg" alt="Shared bathroom sink and toilet" loading="lazy"></button>
+        <button data-full="images/bathroom-door.jpeg" data-caption="Bathroom"><img src="images/bathroom-door.jpeg" alt="Bathroom door" loading="lazy"></button>
+        <button data-full="images/stairs.jpeg" data-caption="Stairs"><img src="images/stairs.jpeg" alt="Interior stairs" loading="lazy"></button>
+        <button data-full="images/amenities.jpeg" data-caption="Shared amenities"><img src="images/amenities.jpeg" alt="Shared amenities" loading="lazy"></button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<dialog class="lightbox" id="lightbox" aria-label="Photo viewer">
+  <button class="lb-close" aria-label="Close photo">×</button>
+  <div class="lb-frame">
+    <img id="lb-img" src="" alt="">
+    <p class="lb-caption" id="lb-caption"></p>
+  </div>
+</dialog>
+
+<!-- Location -->
+<section id="location" aria-labelledby="location-title">
+  <div class="wrap">
+    <h2 class="section-title" id="location-title">Location &amp; Nearby</h2>
+    <div class="location-grid">
+      <div>
+        <p class="address"><strong>Purok 6, Brgy. Osmeña, Ilagan City</strong> (along Maharlika Highway), Isabela</p>
+        <h3 class="landmarks-title">Nearby landmarks</h3>
+        <ul class="landmarks">
+          <li>Between Development Bank of the Philippines (DBP) and DENR / NBI</li>
+          <li>Close to Isabela State University (ISU)</li>
+          <li>Isabela School of Arts and Trade</li>
+          <li>PNP Provincial Headquarters</li>
+          <li>Ilagan Public Market</li>
+          <li>Isabela Provincial Hospital</li>
+        </ul>
+        <div class="transport"><strong>Transport:</strong> Tricycle terminal right across the road. Ilagan–Suburb jeepneys pass along the highway.</div>
+        <div class="button-row">
+          <a class="btn btn-primary" href="https://www.google.com/maps/dir/?api=1&amp;destination=17.1275608,121.8705694" target="_blank" rel="noopener">Get Directions</a>
+          <a class="btn btn-outline" href="https://www.google.com/maps/@17.1275608,121.8705694,72a,63.8y,358.72h,87.76t/data=!3m7!1e1!3m5!1sYFDBxVLU0m-8ifMqVtWWVA!2e0!6shttps:%2F%2Fstreetviewpixels-pa.clients6.google.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D2.237777720474398%26panoid%3DYFDBxVLU0m-8ifMqVtWWVA%26yaw%3D358.7232188654818!7i16384!8i8192?entry=ttu&amp;g_ep=EgoyMDI2MTExOC4xIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener">View Street View</a>
+        </div>
+      </div>
+      <div>
+        <iframe class="map-frame"
+          src="https://www.google.com/maps?q=17.1275608,121.8705694&amp;z=17&amp;output=embed"
+          title="Map of Benjamin's Place, Brgy. Osmeña, Ilagan City"
+          loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Contact -->
+<section id="contact" class="contact" aria-labelledby="contact-title">
+  <div class="wrap">
+    <h2 class="section-title" id="contact-title">Get in Touch</h2>
+    <p class="section-intro">Message us anytime. We reply as soon as we can.</p>
+    <div class="contact-grid">
+      <div class="contact-card">
+        <h3>Contact</h3>
+        <a class="contact-line" href="tel:+639178590807">Phone / SMS: 0917 859 0807</a>
+        <a class="contact-line" href="mailto:mvdomingo68@gmail.com">Email: mvdomingo68@gmail.com</a>
+        <p class="contact-line">Facebook / Messenger: Leni Domingo</p>
+        <a class="btn btn-primary" href="https://m.me/leni.domingo" target="_blank" rel="noopener">Message us on Facebook</a>
+      </div>
+      <div class="contact-card">
+        <h3>Payment</h3>
+        <p class="contact-line">GCash and Cash only</p>
+        <div class="gcash-box">
+          <p class="label">GCash</p>
+          <p class="num" id="gcash-num">09178590807</p>
+          <button class="btn btn-primary copy-btn" id="copy-btn" type="button">Copy Number</button>
+          <p class="copy-msg" id="copy-msg" role="status" aria-live="polite"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <p>© Benjamin's Place · Purok 6, Brgy. Osmeña, Ilagan City, Isabela</p>
+</footer>
+
+<script>
+  // Photo lightbox
+  const lb = document.getElementById('lightbox');
+  const lbImg = document.getElementById('lb-img');
+  const lbCap = document.getElementById('lb-caption');
+  document.querySelectorAll('.gallery-grid button').forEach(btn => {
+    btn.addEventListener('click', () => {
+      lbImg.src = btn.dataset.full;
+      lbImg.alt = btn.querySelector('img').alt;
+      lbCap.textContent = btn.dataset.caption || '';
+      lb.showModal();
+    });
+  });
+  lb.querySelector('.lb-close').addEventListener('click', () => lb.close());
+  lb.addEventListener('click', e => { if (e.target === lb) lb.close(); });
+
+  // Click to copy GCash number
+  const copyBtn = document.getElementById('copy-btn');
+  const copyMsg = document.getElementById('copy-msg');
+  copyBtn.addEventListener('click', async () => {
+    const number = document.getElementById('gcash-num').textContent.trim();
+    try {
+      await navigator.clipboard.writeText(number);
+    } catch (err) {
+      const ta = document.createElement('textarea');
+      ta.value = number;
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand('copy');
+      ta.remove();
+    }
+    copyBtn.textContent = 'Copied!';
+    copyBtn.classList.add('copied');
+    copyMsg.textContent = 'GCash number copied. Paste it in your GCash app.';
+    setTimeout(() => {
+      copyBtn.textContent = 'Copy Number';
+      copyBtn.classList.remove('copied');
+      copyMsg.textContent = '';
+    }, 2500);
+  });
+</script>
+</body>
+</html>
